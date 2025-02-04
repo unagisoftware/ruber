@@ -1,0 +1,5 @@
+Ruber.configure do |config|
+  config.customer_id = 'uber-customer-id'
+  config.client_id = 'uber-client-id'
+  config.client_secret = 'uber-client-secret'
+end
