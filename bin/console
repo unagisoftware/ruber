@@ -10,11 +10,5 @@ rescue LoadError
   # dotenv is optional
 end
 
-# You can add fixtures and/or initialization code here to make experimenting
-# with your gem easier. You can also use a different console, if you like.
-$client = Ruber::Client.new(client_secret: ENV["UBER_CLIENT_SECRET"])
-
-puts "ENV['UBER_ACCESS_TOKEN'] = #{ENV['UBER_ACCESS_TOKEN']}"
-
 require "irb"
 IRB.start(__FILE__)
