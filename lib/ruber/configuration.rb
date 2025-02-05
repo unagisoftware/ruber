@@ -10,8 +10,12 @@ module Ruber
       @configuration ||= Configuration.new
     end
 
-    def configuration=(config)
-      @configuration = config
+    def configuration=(config_hash)
+      config_hash.each do |key, value|
+        configuration.send "#{key}=", value
+      end
+
+      configuration
     end
 
     def configure

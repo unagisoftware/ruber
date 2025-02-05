@@ -13,6 +13,9 @@ module Ruber
   class << self
     extend Forwardable
 
-    def_delegators :configuration, :customer_id, :client_id, :client_secret
+    def_delegators(
+      :configuration, :customer_id, :client_id, :client_secret,
+      :customer_id=, :client_id=, :client_secret=
+    )
   end
 end
