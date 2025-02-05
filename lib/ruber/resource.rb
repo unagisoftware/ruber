@@ -1,4 +1,7 @@
+# frozen_string_literal: true
+
 module Ruber
+  # Provides methods to handle all type of CRUD requests
   class Resource
     attr_reader :client
 
@@ -43,7 +46,8 @@ module Ruber
       when 500
         raise Error, "We were unable to perform the request due to server-side problems. #{response.body["error"]}"
       when 503
-        raise Error, "You have been rate limited for sending more than 20 requests per second. #{response.body["error"]}"
+        raise Error,
+              "You have been rate limited for sending more than 20 requests per second. #{response.body["error"]}"
       end
 
       response

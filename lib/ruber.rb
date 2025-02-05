@@ -4,6 +4,7 @@ require_relative "ruber/version"
 require "forwardable"
 require "ruber/configuration"
 
+# a Ruby wrapper for Uber API
 module Ruber
   autoload :Client, "ruber/client"
   autoload :Error, "ruber/error"

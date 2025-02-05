@@ -1,10 +1,13 @@
+# frozen_string_literal: true
+
 require "faraday"
 require "faraday_middleware"
 
 module Ruber
+  # The client that establish connection with the Uber API
   class Client
     BASE_URL = "https://api.uber.com/v1.2"
-    
+
     attr_reader :client_secret, :adapter
 
     def initialize(client_secret:, adapter: Faraday.default_adapter)
@@ -16,10 +19,9 @@ module Ruber
       @connection ||= Faraday.new do |conn|
         conn.url_prefix = BASE_URL
         conn.request :json
-        conn.response :json, content_type: 'application/json'
+        conn.response :json, content_type: "application/json"
         conn.adapter adapter
       end
     end
   end
 end
-

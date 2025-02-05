@@ -1,11 +1,11 @@
+# frozen_string_literal: true
+
 module Ruber
   class Configuration
     attr_accessor :customer_id, :client_id, :client_secret
   end
 
   class << self
-    attr_reader :configuration
-
     def configuration
       @configuration ||= Configuration.new
     end
