@@ -4,7 +4,6 @@ require_relative "ruber/version"
 require "forwardable"
 require "ruber/configuration"
 require "ruber/authenticator"
-require "ruber/cache"
 
 # a Ruby wrapper for Uber API
 module Ruber
@@ -18,8 +17,8 @@ module Ruber
     extend Forwardable
 
     def_delegators(
-      :configuration, :customer_id, :client_id, :client_secret,
-      :customer_id=, :client_id=, :client_secret=, :cache_key, :cache_key=
+      :configuration, :customer_id, :client_id, :client_secret, :cache,
+      :customer_id=, :client_id=, :client_secret=, :cache_key, :cache_key=, :cache=
     )
   end
 end

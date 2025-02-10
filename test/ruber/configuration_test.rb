@@ -12,6 +12,14 @@ module Ruber
         cache_key: "custom_cache_key"
       }
 
+      @custom_cache = Class.new do
+        def read(key) = memory_store[key]
+        def write(key, value, _options = {}) = memory_store[key] = value
+        def clear = memory_store.clear
+        def delete(key) = memory_store.delete(key)
+        def memory_store = @memory_store ||= {}
+      end.new
+
       Ruber.configuration = nil
     end
 
@@ -64,6 +72,18 @@ module Ruber
       end
 
       assert_equal @config_values[:cache_key], Ruber.cache_key
+    end
+
+    def test_cache_can_be_set_explicitly
+      Ruber.cache = @custom_cache
+
+      assert_equal @custom_cache, Ruber.cache
+    end
+
+    def test_cache_must_respond_to_read_write_clear_and_delete
+      assert_raises(ArgumentError) do
+        Ruber.cache = Object.new
+      end
     end
 
     private
