@@ -19,6 +19,19 @@ If bundler is not being used to manage dependencies, install the gem by executin
 ```bash
 gem install UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG
 ```
+## Cache
+
+Ruber uses the `Ruber::Cache` class to store the access token. The cache is a simple in-memory cache that is cleared when the access token expires.
+
+You can configure your own cache implementation by setting the `Ruber.cache` attribute.
+
+```ruby
+Ruber.cache = Redis.new
+# or
+Ruber.cache = Rails.cache
+# or any object that responds to read/write/delete/clear
+Ruber.cache = YourCustomCache.new
+```
 
 ## Usage
 
