@@ -6,7 +6,6 @@ require "json"
 module Ruber
   class Authenticator
     OAUTH_URL = "https://auth.uber.com/oauth/v2/token"
-    CACHE_KEY = "uber_auth_token"
     GRANT_TYPE = "client_credentials"
     SCOPE = "eats.deliveries"
 

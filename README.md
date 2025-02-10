@@ -20,10 +20,8 @@ If bundler is not being used to manage dependencies, install the gem by executin
 gem install UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG
 ```
 ## Cache
+Ruber uses a caching solution to improve efficiency (e.g., for caching tokens). By default, it uses a simple in-memory cache, but you can change the cache method by setting the `Ruber.cache` attribute
 
-Ruber uses the `Ruber::Cache` class to store the access token. The cache is a simple in-memory cache that is cleared when the access token expires.
-
-You can configure your own cache implementation by setting the `Ruber.cache` attribute.
 
 ```ruby
 Ruber.cache = Redis.new
