@@ -11,13 +11,17 @@ module Ruber
 
     class << self
       def access_token
-        Ruber.cache.read(Ruber.cache_key) || fetch_new_token
+        Ruber.cache.read(cache_key) || fetch_new_token
       end
 
       def refresh_access_token
-        Ruber.cache.delete(Ruber.cache_key)
+        Ruber.cache.delete(cache_key)
 
         fetch_new_token
+      end
+
+      def cache_key
+        @cache_key ||= "#{Ruber.customer_id}_#{Ruber.client_id}_access_token"
       end
 
       private
@@ -35,7 +39,7 @@ module Ruber
 
         data = JSON.parse(response.body.to_s)
 
-        Ruber.cache.write(Ruber.cache_key, data["access_token"], expires_in: data["expires_in"].to_i)
+        Ruber.cache.write(cache_key, data["access_token"], expires_in: data["expires_in"].to_i)
 
         @access_token = data["access_token"]
       end

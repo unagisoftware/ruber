@@ -5,7 +5,6 @@ require_relative "configuration/null_cache"
 module Ruber
   class Configuration
     attr_accessor :customer_id, :client_id, :client_secret
-    attr_writer :cache_key
 
     def cache
       @cache ||= NullCache.new
@@ -17,10 +16,6 @@ module Ruber
       end
 
       @cache = store
-    end
-
-    def cache_key
-      @cache_key || "#{customer_id}_#{client_id}_access_token"
     end
   end
 

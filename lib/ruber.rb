@@ -17,8 +17,8 @@ module Ruber
     extend Forwardable
 
     def_delegators(
-      :configuration, :customer_id, :client_id, :client_secret, :cache,
-      :customer_id=, :client_id=, :client_secret=, :cache_key, :cache_key=, :cache=
+      :configuration, :customer_id, :client_id, :client_secret,
+      :customer_id=, :client_id=, :client_secret=, :cache, :cache=
     )
   end
 end
