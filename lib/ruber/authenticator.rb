@@ -11,7 +11,11 @@ module Ruber
 
     class << self
       def access_token
-        Ruber.cache.read(cache_key) || fetch_new_token
+        @access_token = cached_token || fetch_new_token
+
+        @access_token = refresh_access_token if token_expired?
+
+        @access_token
       end
 
       def refresh_access_token
@@ -26,6 +30,14 @@ module Ruber
 
       private
 
+      def token_expired?
+        cached_token[:expires_at] < Time.now
+      end
+
+      def cached_token
+        Ruber.cache.read(cache_key)
+      end
+
       def fetch_new_token
         response = Faraday.post(
           OAUTH_URL,
@@ -39,9 +51,10 @@ module Ruber
 
         data = JSON.parse(response.body.to_s)
 
-        Ruber.cache.write(cache_key, data["access_token"], expires_in: data["expires_in"].to_i)
+        expires_at = Time.now + data["expires_in"].to_i
+        Ruber.cache.write(cache_key, { token: data["access_token"], expires_at: expires_at })
 
-        @access_token = data["access_token"]
+        data["access_token"]
       end
     end
   end

@@ -18,11 +18,11 @@ module Ruber
       cached_token = Ruber.cache.read(Authenticator.cache_key)
 
       assert_equal "new_token", token
-      assert_equal "new_token", cached_token
+      assert_equal "new_token", cached_token[:token]
     end
 
     def test_refresh_access_token_forces_new_token
-      Ruber.cache.write(Authenticator.cache_key, "old_token")
+      Ruber.cache.write(Authenticator.cache_key, { token: "old_token", expires_at: Time.now + 3600 })
 
       stub_token_request(access_token: "refreshed_token", expires_in: 3600)
 
@@ -30,7 +30,19 @@ module Ruber
       cached_token = Ruber.cache.read(Authenticator.cache_key)
 
       assert_equal "refreshed_token", token
-      assert_equal "refreshed_token", cached_token
+      assert_equal "refreshed_token", cached_token[:token]
+    end
+
+    def test_refresh_access_token_if_expired
+      Ruber.cache.write(Authenticator.cache_key, { token: "expired_token", expires_at: Time.now - 3600 })
+
+      stub_token_request(access_token: "refreshed_token", expires_in: 3600)
+
+      token = Authenticator.access_token
+      cached_token = Ruber.cache.read(Authenticator.cache_key)
+
+      assert_equal "refreshed_token", token
+      assert_equal "refreshed_token", cached_token[:token]
     end
 
     private
