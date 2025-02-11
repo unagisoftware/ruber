@@ -14,3 +14,7 @@ gem "rubocop", "~> 1.21"
 group :development do
   gem "dotenv"
 end
+
+group :test do
+  gem "webmock"
+end

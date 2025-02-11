@@ -1,8 +1,22 @@
 # frozen_string_literal: true
 
+require_relative "configuration/null_cache"
+
 module Ruber
   class Configuration
     attr_accessor :customer_id, :client_id, :client_secret
+
+    def cache
+      @cache ||= NullCache.new
+    end
+
+    def cache=(store)
+      unless %i[read write clear delete].all? { |method| store.respond_to?(method) }
+        raise ArgumentError, "cache_store must respond to read, write, clear, and delete"
+      end
+
+      @cache = store
+    end
   end
 
   class << self
@@ -10,9 +24,13 @@ module Ruber
       @configuration ||= Configuration.new
     end
 
-    def configuration=(config_hash)
-      config_hash.each do |key, value|
-        configuration.send "#{key}=", value
+    def configuration=(config)
+      if config.is_a?(Hash)
+        config.each do |key, value|
+          configuration.send "#{key}=", value
+        end
+      else
+        @configuration = config
       end
 
       configuration
