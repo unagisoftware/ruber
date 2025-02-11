@@ -12,7 +12,11 @@ module Ruber
 
     def read(key) = @store.transaction { @store[key] }
     def write(key, value) = @store.transaction { @store[key] = value }
-    def clear = File.delete(Ruber.configuration.file_cache_path) if File.exist?(Ruber.configuration.file_cache_path)
+
+    def clear
+      File.delete(Ruber.configuration.file_cache_path) if File.exist?(Ruber.configuration.file_cache_path)
+    end
+
     def delete(key) = @store.transaction { @store.delete(key) }
   end
 end

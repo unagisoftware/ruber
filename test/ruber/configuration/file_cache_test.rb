@@ -7,7 +7,6 @@ require "fileutils"
 module Ruber
   class FileCacheTest < Minitest::Test
     def setup
-      Ruber.configuration.file_cache_path = File.join(Dir.tmpdir, "file_cache_test.yaml")
       File.delete(Ruber.configuration.file_cache_path) if File.exist?(Ruber.configuration.file_cache_path)
 
       @cache = FileCache.new
