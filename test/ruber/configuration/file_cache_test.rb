@@ -13,7 +13,7 @@ module Ruber
     end
 
     def teardown
-      File.delete(Ruber.configuration.file_cache_path) if File.exist?(Ruber.configuration.file_cache_path)
+      @cache.clear
     end
 
     def test_initialize_raises_error_if_no_file_path
@@ -47,6 +47,16 @@ module Ruber
 
       @cache.clear
       assert_nil @cache.read("key1")
+      assert_nil @cache.read("key2")
+    end
+
+    def test_clear_and_write_again
+      @cache.write("key1", "value1")
+      @cache.write("key2", "value1")
+      @cache.clear
+      @cache.write("key1", "value2")
+
+      assert "value2", @cache.read("key1")
       assert_nil @cache.read("key2")
     end
   end
