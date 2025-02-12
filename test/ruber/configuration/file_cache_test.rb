@@ -29,6 +29,12 @@ module Ruber
       assert_equal "bar", @cache.read("foo")
     end
 
+    def test_write_and_read_complex_object
+      @cache.write("foo", { foo: "bar", bar: "baz" })
+      assert_equal "bar", @cache.read("foo")[:foo]
+      assert_equal "baz", @cache.read("foo")[:bar]
+    end
+
     def test_delete
       @cache.write("key", "value")
       @cache.delete("key")
