@@ -10,6 +10,7 @@ module Ruber
   autoload :Client, "ruber/client"
   autoload :Error, "ruber/error"
   autoload :Authenticator, "ruber/authenticator"
+  autoload :Object, "ruber/object"
 
   DEFAULT_API_BASE = "https://api.uber.com/v1"
 
