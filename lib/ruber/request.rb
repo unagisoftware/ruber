@@ -12,8 +12,6 @@ module Ruber
     end
 
     def get
-      require "pry-byebug"
-      # binding.pry
       handle_response connection.get(@url)
     end
 

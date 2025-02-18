@@ -18,6 +18,6 @@ class Minitest::Test # rubocop:disable Style/ClassAndModuleChildren
 
     Ruber.configuration.file_cache_path = "file_cache_test.yaml"
     Ruber.configuration.customer_id = "a_customer_id"
-    Ruber.configuration.client_secret = "a_customer_secret"
+    Ruber.configuration.client_secret = "a_client_secret"
   end
 end

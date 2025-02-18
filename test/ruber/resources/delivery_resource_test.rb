@@ -5,7 +5,7 @@ require File.expand_path("../../test_helper", __dir__)
 class DelvieryResourceTest < Minitest::Test
   def test_find
     stub_delivery_request
-    delivery = Ruber::DeliveryResource.find('del_some_id')
+    delivery = Ruber::DeliveryResource.find("del_some_id")
 
     assert_equal Ruber::Delivery, delivery.class
     assert_equal "quote_id", delivery.quote_id
