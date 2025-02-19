@@ -7,7 +7,7 @@ class DelvieryResourceTest < Minitest::Test
     stub_delivery_request
     delivery = Ruber::DeliveryResource.find("del_some_id")
 
-    assert_equal Ruber::Delivery, delivery.class
+    assert_instance_of Ruber::Delivery, delivery
     assert_equal "quote_id", delivery.quote_id
   end
 

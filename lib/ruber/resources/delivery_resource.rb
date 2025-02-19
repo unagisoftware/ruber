@@ -4,7 +4,7 @@ module Ruber
   class DeliveryResource
     class << self
       def find(id)
-        response = Request.new("customers/:customer_id/deliveries/#{id}").get
+        response = Request.new("customers/#{Ruber.customer_id}/deliveries/#{id}").get
 
         Delivery.new response.body
       end

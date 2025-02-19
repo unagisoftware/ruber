@@ -8,7 +8,7 @@ module Ruber
     BASE_URL = "https://api.uber.com/v1"
 
     def initialize(url)
-      @url = url.gsub(":customer_id", Ruber.customer_id)
+      @url = url
     end
 
     def get
