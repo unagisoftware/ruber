@@ -4,6 +4,8 @@ require_relative "ruber/version"
 require "forwardable"
 require "ruber/configuration"
 require "ruber/authenticator"
+require "ruber/request"
+require "ruber/resources/delivery_resource"
 
 # a Ruby wrapper for Uber API
 module Ruber
@@ -11,6 +13,10 @@ module Ruber
   autoload :Error, "ruber/error"
   autoload :Authenticator, "ruber/authenticator"
   autoload :Object, "ruber/object"
+
+  autoload :DeliveryResource, "ruber/resources/delivery_resource"
+
+  autoload :Delivery, "ruber/objects/delivery"
 
   DEFAULT_API_BASE = "https://api.uber.com/v1"
 

@@ -1,34 +1,46 @@
 # frozen_string_literal: true
 
-module Ruber
-  # Provides methods to handle all type of CRUD requests
-  class Resource
-    attr_reader :client
+require "faraday"
+require "faraday_middleware"
 
-    def initialize(client)
-      @client = client
+module Ruber
+  class Request
+    BASE_URL = "https://api.uber.com/v1"
+
+    def initialize(url)
+      @url = url
+    end
+
+    def get
+      handle_response connection.get(@url)
+    end
+
+    def post(body:, headers: {})
+      handle_response connection.post(@url, body, headers)
+    end
+
+    def patch(body:, headers: {})
+      handle_response connection.patch(@url, body, headers)
+    end
+
+    def put(body:, headers: {})
+      handle_response connection.put(@url, body, headers)
+    end
+
+    def delete(params: {}, headers: {})
+      handle_response connection.delete(@url, params, headers)
     end
 
     private
 
-    def get_request(url, params: {}, headers: {})
-      handle_response client.connection.get(url, params, headers)
-    end
-
-    def post_request(url, body:, headers: {})
-      handle_response client.connection.post(url, body, headers)
-    end
-
-    def patch_request(url, body:, headers: {})
-      handle_response client.connection.patch(url, body, headers)
-    end
-
-    def put_request(url, body:, headers: {})
-      handle_response client.connection.put(url, body, headers)
-    end
-
-    def delete_request(url, params: {}, headers: {})
-      handle_response client.connection.delete(url, params, headers)
+    def connection
+      @connection ||= Faraday.new do |conn|
+        conn.url_prefix = BASE_URL
+        conn.request :authorization, :Bearer, Ruber::Authenticator.access_token
+        conn.request :json
+        conn.response :json, content_type: "application/json", parser_options: { symbolize_names: true }
+        conn.adapter Faraday.default_adapter
+      end
     end
 
     def handle_response(response)

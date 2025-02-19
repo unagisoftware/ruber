@@ -11,7 +11,7 @@ module Ruber
 
     class << self
       def access_token
-        @access_token = cached_token || fetch_new_token
+        @access_token = cached_token&.fetch(:token) || fetch_new_token
 
         @access_token = refresh_access_token if token_expired?
 

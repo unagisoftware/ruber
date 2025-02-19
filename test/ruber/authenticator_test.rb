@@ -44,18 +44,5 @@ module Ruber
       assert_equal "refreshed_token", token
       assert_equal "refreshed_token", cached_token[:token]
     end
-
-    private
-
-    def stub_token_request(access_token:, expires_in:)
-      stub_request(:post, Authenticator::OAUTH_URL)
-        .to_return(
-          status: 200,
-          body: {
-            access_token: access_token,
-            expires_in: expires_in
-          }.to_json
-        )
-    end
   end
 end
