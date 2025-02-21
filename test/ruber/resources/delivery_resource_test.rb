@@ -7,8 +7,8 @@ class DelvieryResourceTest < Minitest::Test
     stub_deliveries_request
     deliveries = Ruber::DeliveryResource.all
 
-    assert_equal Ruber::Collection, deliveries.class
-    assert_equal Ruber::Delivery, deliveries.data.first.class
+    assert_instance_of Ruber::Collection, deliveries
+    assert_instance_of Ruber::Delivery, deliveries.data.first
     assert_equal "quote_id", deliveries.data.first.quote_id
   end
 
