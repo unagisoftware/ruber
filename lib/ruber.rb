@@ -16,6 +16,7 @@ module Ruber
 
   autoload :DeliveryResource, "ruber/resources/delivery_resource"
 
+  autoload :Collection, "ruber/collection"
   autoload :Delivery, "ruber/objects/delivery"
 
   DEFAULT_API_BASE = "https://api.uber.com/v1"
