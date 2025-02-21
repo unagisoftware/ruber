@@ -3,6 +3,15 @@
 require File.expand_path("../../test_helper", __dir__)
 
 class DelvieryResourceTest < Minitest::Test
+  def test_all
+    stub_deliveries_request
+    deliveries = Ruber::DeliveryResource.all
+
+    assert_equal Ruber::Collection, deliveries.class
+    assert_equal Ruber::Delivery, deliveries.data.first.class
+    assert_equal "quote_id", deliveries.data.first.quote_id
+  end
+
   def test_find
     stub_delivery_request
     delivery = Ruber::DeliveryResource.find("del_some_id")
@@ -21,6 +30,17 @@ class DelvieryResourceTest < Minitest::Test
         headers: { "Content-Type" => "application/json" },
         status: 200,
         body: File.new("test/fixtures/delivery.json").read
+      )
+  end
+
+  def stub_deliveries_request
+    stub_token_request
+    stub_request(:get, %r{.*customers/#{Ruber.customer_id}/deliveries})
+      .with(headers: { "Authorization" => "Bearer #{Ruber::Authenticator.access_token}" })
+      .to_return(
+        headers: { "Content-Type" => "application/json" },
+        status: 200,
+        body: File.new("test/fixtures/deliveries.json").read
       )
   end
 end
