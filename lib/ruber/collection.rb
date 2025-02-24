@@ -4,12 +4,10 @@ module Ruber
   class Collection
     attr_reader :data, :next_href
 
-    def self.from_response(response, type:)
-      body = response.body
-
+    def self.from_response(response_body, type:)
       new(
-        data: body[:data].map { |attrs| type.new(attrs) },
-        next_href: body[:next_href]
+        data: response_body[:data].map { |attrs| type.new(attrs) },
+        next_href: response_body[:next_href]
       )
     end
 

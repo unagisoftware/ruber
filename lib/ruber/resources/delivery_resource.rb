@@ -6,7 +6,7 @@ module Ruber
       def all
         response = Request.new("customers/#{Ruber.customer_id}/deliveries").get
 
-        Collection.from_response(response, type: Delivery)
+        Collection.from_response(response.body, type: Delivery)
       end
 
       def find(id)
