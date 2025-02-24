@@ -14,6 +14,12 @@ module Ruber
 
         Delivery.new response.body
       end
+
+      def create(params)
+        response = Request.new("customers/#{Ruber.customer_id}/deliveries").post(body: params)
+
+        Delivery.new response.body
+      end
     end
   end
 end

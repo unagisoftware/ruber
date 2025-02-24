@@ -6,6 +6,7 @@ require "ruber/configuration"
 require "ruber/authenticator"
 require "ruber/request"
 require "ruber/resources/delivery_resource"
+require "ruber/error"
 
 # a Ruby wrapper for Uber API
 module Ruber
