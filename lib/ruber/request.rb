@@ -15,7 +15,7 @@ module Ruber
       handle_response connection.get(@url)
     end
 
-    def post(body:, headers: {})
+    def post(body: {}, headers: {})
       handle_response connection.post(@url, body, headers)
     end
 

@@ -28,6 +28,14 @@ class DelvieryResourceTest < Minitest::Test
     assert_equal "quote_id", delivery.quote_id
   end
 
+  def test_cancel
+    stub_delivery_cancellation_request
+    delivery = Ruber::DeliveryResource.cancel("del_some_id")
+
+    assert_instance_of Ruber::Delivery, delivery
+    assert_equal "quote_id", delivery.quote_id
+  end
+
   private
 
   def stub_delivery_request
@@ -49,6 +57,17 @@ class DelvieryResourceTest < Minitest::Test
         headers: { "Content-Type" => "application/json" },
         status: 200,
         body: File.new("test/fixtures/delivery.json").read
+      )
+  end
+
+  def stub_delivery_cancellation_request
+    stub_token_request
+    stub_request(:post, %r{.*customers/#{Ruber.customer_id}/deliveries/.*})
+      .with(headers: { "Authorization" => "Bearer #{Ruber::Authenticator.access_token}" })
+      .to_return(
+        headers: { "Content-Type" => "application/json" },
+        status: 200,
+        body: File.new("test/fixtures/delivery_cancel.json").read
       )
   end
 

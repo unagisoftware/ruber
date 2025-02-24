@@ -20,6 +20,12 @@ module Ruber
 
         Delivery.new response.body
       end
+
+      def cancel(id)
+        response = Request.new("customers/#{Ruber.customer_id}/deliveries/#{id}/cancel").post
+
+        Delivery.new response.body
+      end
     end
   end
 end
