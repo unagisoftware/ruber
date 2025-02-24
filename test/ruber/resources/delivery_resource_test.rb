@@ -66,10 +66,10 @@ class DelvieryResourceTest < Minitest::Test
   def delivery_params
     {
       pickup_name: "Store Name",
-      pickup_address: "{\"street_address\":[\"100 Maiden Ln\"],\"city\":\"New York\",\"state\":\"NY\",\"zip_code\":\"10023\",\"country\":\"US\"}",
+      pickup_address: "{\"street_address\":[\"100 Maiden Ln\"],\"city\":\"New York\",\"state\":\"NY\",\"zip_code\":\"10023\",\"country\":\"US\"}", # rubocop:disable Layout/LineLength
       pickup_phone_number: "+15555555555",
       dropoff_name: "Gordon Shumway",
-      dropoff_address: "{\"street_address\":[\"30 Lincoln Center Plaza\"],\"city\":\"New York\",\"state\":\"NY\",\"zip_code\":\"10023\",\"country\":\"US\"}",
+      dropoff_address: "{\"street_address\":[\"30 Lincoln Center Plaza\"],\"city\":\"New York\",\"state\":\"NY\",\"zip_code\":\"10023\",\"country\":\"US\"}", # rubocop:disable Layout/LineLength
       dropoff_phone_number: "+15555555555",
       manifest_items: [
         {
