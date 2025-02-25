@@ -2,7 +2,7 @@
 
 require File.expand_path("../../test_helper", __dir__)
 
-class DelvieryResourceTest < Minitest::Test
+class DeliveryResourceTest < Minitest::Test
   def test_all
     stub_deliveries_request
     deliveries = Ruber::DeliveryResource.all
@@ -22,7 +22,7 @@ class DelvieryResourceTest < Minitest::Test
 
   def test_create
     stub_delivery_creation_request
-    delivery = Ruber::DeliveryResource.create(delivery_params)
+    delivery = Ruber::DeliveryResource.create(create_params)
 
     assert_instance_of Ruber::Delivery, delivery
     assert_equal "quote_id", delivery.quote_id
@@ -34,6 +34,15 @@ class DelvieryResourceTest < Minitest::Test
 
     assert_instance_of Ruber::Delivery, delivery
     assert_equal "quote_id", delivery.quote_id
+  end
+
+  def test_update
+    stub_delivery_update_request
+    delivery = Ruber::DeliveryResource.update("del_some_id", update_params)
+
+    assert_instance_of Ruber::Delivery, delivery
+    assert_equal "The doorbell is not working. Knock on the door to the rhythm of Duraznito by Damas Gratis.",
+                 delivery.pickup.notes
   end
 
   def test_proof_of_delivery
@@ -90,6 +99,17 @@ class DelvieryResourceTest < Minitest::Test
       )
   end
 
+  def stub_delivery_update_request
+    stub_token_request
+    stub_request(:post, %r{.*customers/#{Ruber.customer_id}/deliveries/.*})
+      .with(headers: { "Authorization" => "Bearer #{Ruber::Authenticator.access_token}" })
+      .to_return(
+        headers: { "Content-Type" => "application/json" },
+        status: 200,
+        body: File.new("test/fixtures/delivery_update.json").read
+      )
+  end
+
   def stub_deliveries_request
     stub_token_request
     stub_request(:get, %r{.*customers/#{Ruber.customer_id}/deliveries})
@@ -108,7 +128,7 @@ class DelvieryResourceTest < Minitest::Test
     }
   end
 
-  def delivery_params
+  def create_params
     {
       pickup_name: "Store Name",
       pickup_address: "{\"street_address\":[\"100 Maiden Ln\"],\"city\":\"New York\",\"state\":\"NY\",\"zip_code\":\"10023\",\"country\":\"US\"}", # rubocop:disable Layout/LineLength
@@ -131,6 +151,29 @@ class DelvieryResourceTest < Minitest::Test
           vat_percentage: 1_250_000
         }
       ]
+    }
+  end
+
+  def update_params
+    {
+      "dropoff_notes": "Second floor, black door to the right.",
+      "dropoff_verification": {
+        "barcodes": []
+      },
+      "manifest_reference": "REF0000002",
+      "pickup_notes": "The doorbell is not working. Knock on the door to the rhythm of Duraznito by Damas Gratis.",
+      "pickup_verification": {
+        "barcodes": []
+      },
+      "requires_dropoff_signature": true,
+      "requires_id": false,
+      "tip_by_customer": 500,
+      "dropoff_latitude": 40.7727076,
+      "dropoff_longitude": -73.9839082,
+      "pickup_ready_dt": "2024-12-12T14:00:00.000Z",
+      "pickup_deadline_dt": "2024-12-12T14:30:00.000Z",
+      "dropoff_ready_dt": "2024-12-12T14:30:00.000Z",
+      "dropoff_deadline_dt": "2024-12-12T16:00:00.000Z"
     }
   end
 end
