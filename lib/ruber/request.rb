@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require "faraday"
-require "faraday_middleware"
+require "faraday/net_http_persistent"
 
 module Ruber
   class Request
@@ -39,7 +39,6 @@ module Ruber
         conn.request :authorization, :Bearer, Ruber::Authenticator.access_token
         conn.request :json
         conn.response :json, content_type: "application/json", parser_options: { symbolize_names: true }
-        conn.adapter Faraday.default_adapter
       end
     end
 

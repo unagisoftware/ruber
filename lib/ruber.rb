@@ -22,6 +22,8 @@ module Ruber
 
   DEFAULT_API_BASE = "https://api.uber.com/v1"
 
+  Faraday.default_adapter = :net_http_persistent
+
   class << self
     extend Forwardable
 
