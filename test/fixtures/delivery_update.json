@@ -1,0 +1,295 @@
+{
+  "id": "del_some_id",
+  "quote_id": "quote_id",
+  "complete": false,
+  "courier": {
+    "name": "Alex I.",
+    "rating": 0,
+    "vehicle_type": "car",
+    "phone_number": "+16283337630",
+    "location": {
+      "lat": 37.765987,
+      "lng": -122.43153
+    },
+    "img_href": "https://d1w2poirtb3as9.cloudfront.net/default.jpeg?Expires=1683022587&Signature=SDlYXhlrNUXVibLEi1veShGrVQqn~5cHlDmKHmirytOvtRPLUzMICPLoLXL8vn7XREKo6XmRjYbE~tMeCqBf3Pjyc4OKqsAyukoUr5ew7S9ipbJ-O0PCp5ThZ4j46yZquza1s~qOQISHopH734F17BaNxod9E9QPJJ3phFcrl4COKYSt3qPsn9Y9PQxyKecJ5Sr0RveI5hGqtQR~u2d3EZgXmJxuGUdk26WX-Ho1h3ziIpnIBu6P6upbOtlnxLqn-dG7tl15pnn~bW1w0qAemFUUdqWzzWfjVGLHonDqE4LM5xE~t1T~1zJCNQ-uzijjI6tnEfIHJ9LgWRRhX3sKXQ__&Key-Pair-Id=K36LFL06Z5BT10",
+    "public_phone_info": {
+      "formatted_phone_number": "+15555555557,48023618",
+      "phone_number": "+15555555557",
+      "pin_code": "48023618"
+    }
+  },
+  "courier_imminent": true,
+  "created": "2023-05-01T22:15:13.646Z",
+  "currency": "usd",
+  "deliverable_action": "deliverable_action_meet_at_door",
+  "dropoff": {
+    "name": "Joan P.",
+    "phone_number": "+16283337630",
+    "address": "2200 Market St, San Francisco, CA 94114, US",
+    "detailed_address": {
+      "street_address_1": "2200 Market St",
+      "street_address_2": "",
+      "city": "San Francisco",
+      "state": "CA",
+      "zip_code": "94114",
+      "country": "US"
+    },
+    "notes": "Second floor, black door to the right.",
+    "seller_notes": "",
+    "courier_notes": "",
+    "location": {
+      "lat": 37.765987,
+      "lng": -122.43153
+    },
+    "verification": {
+      "signature": {
+        "image_url": "https://tb-static.uber.com/prod/file-upload/uploads/courier-task-platform/82a0d88e-100d-40d6-a0d0-ea9c4a2e55bb",
+        "name": "Joan",
+        "signer_relationship": "SELF"
+      },
+      "barcodes": [
+        {
+          "type": "CODE128",
+          "value": "1234567890",
+          "scan_result": {
+            "outcome": "SUCCESS",
+            "timestamp": "2023-05-02T04:34:04.957Z"
+          }
+        }
+      ],
+      "picture": {
+        "image_url": "https://tb-static.uber.com/prod/file-upload/uploads/courier-task-platform/82a0d88e-100d-40d6-a0d0-ea9c4a2e55bb"
+      },
+      "identification": {
+        "min_age_verified": false
+      },
+      "pin_code": {
+        "entered": "3902"
+      },
+      "completion_location": {
+        "lat": 37.765987,
+        "lng": -122.43153
+      }
+    },
+    "verification_requirements": {
+      "signature": true,
+      "signature_requirement": {
+        "enabled": true,
+        "collect_signer_name": true,
+        "collect_signer_relationship": true
+      },
+      "barcodes": [
+        {
+          "value": "string",
+          "type": "CODE39"
+        }
+      ],
+      "pincode": {
+        "enabled": true,
+        "value": "1234"
+      },
+      "identification": {
+        "min_age": 21,
+        "no_sobriety_check": true
+      },
+      "picture": true
+    },
+    "status": "completed",
+    "status_timestamp": "2023-05-02T02:30:07.560Z",
+    "external_store_id": "my_store_123"
+  },
+  "dropoff_deadline": "2023-05-01T23:01:37.000Z",
+  "dropoff_eta": "2023-05-01T22:30:00.077Z",
+  "dropoff_identifier": "",
+  "dropoff_ready": "2023-05-01T22:15:13.000Z",
+  "external_id": "EI000001",
+  "fee": 1099,
+  "kind": "delivery",
+  "live_mode": true,
+  "manifest": {
+    "reference": "EI000001",
+    "description": "1 x Package 1\n",
+    "total_value": 1099
+  },
+  "manifest_items": {
+    "name": "Bow tie",
+    "quantity": 1,
+    "size": "small",
+    "dimensions": {
+      "length": 20,
+      "height": 20,
+      "depth": 20
+    },
+    "price": 100,
+    "weight": 300,
+    "vat_percentage": 1250000
+  },
+  "pickup": {
+    "name": "Lionel Messi's house",
+    "phone_number": "+16283337630",
+    "address": "2200 Market St, San Francisco, CA 94114, US",
+    "detailed_address": {
+      "street_address_1": "2200 Market St",
+      "street_address_2": "",
+      "city": "San Francisco",
+      "state": "CA",
+      "zip_code": "94114",
+      "country": "US"
+    },
+    "notes": "The doorbell is not working. Knock on the door to the rhythm of Duraznito by Damas Gratis.",
+    "seller_notes": "",
+    "courier_notes": "",
+    "location": {
+      "lat": 37.765987,
+      "lng": -122.43153
+    },
+    "verification": {
+      "signature": {
+        "image_url": "https://tb-static.uber.com/prod/file-upload/uploads/courier-task-platform/82a0d88e-100d-40d6-a0d0-ea9c4a2e55bb",
+        "name": "Joan",
+        "signer_relationship": "SELF"
+      },
+      "barcodes": [
+        {
+          "type": "CODE128",
+          "value": "1234567890",
+          "scan_result": {
+            "outcome": "SUCCESS",
+            "timestamp": "2023-05-02T04:34:04.957Z"
+          }
+        }
+      ],
+      "picture": {
+        "image_url": "https://tb-static.uber.com/prod/file-upload/uploads/courier-task-platform/82a0d88e-100d-40d6-a0d0-ea9c4a2e55bb"
+      },
+      "identification": {
+        "min_age_verified": false
+      },
+      "pin_code": {
+        "entered": "3902"
+      },
+      "completion_location": {
+        "lat": 37.765987,
+        "lng": -122.43153
+      }
+    },
+    "verification_requirements": {
+      "signature": true,
+      "signature_requirement": {
+        "enabled": true,
+        "collect_signer_name": true,
+        "collect_signer_relationship": true
+      },
+      "barcodes": [
+        {
+          "value": "string",
+          "type": "CODE39"
+        }
+      ],
+      "pincode": {
+        "enabled": true,
+        "value": "1234"
+      },
+      "identification": {
+        "min_age": 21,
+        "no_sobriety_check": true
+      },
+      "picture": true
+    },
+    "status": "completed",
+    "status_timestamp": "2023-05-02T02:30:07.560Z",
+    "external_store_id": "my_store_123"
+  },
+  "pickup_deadline": "2023-05-01T22:35:13.000Z",
+  "pickup_eta": "2023-05-01T22:16:21.749Z",
+  "pickup_ready": "2023-05-01T22:20:13.000Z",
+  "related_deliveries": [
+    {
+      "id": "ret_BiymjKtjTwKpoS2kSIuxlv",
+      "relationship": "return"
+    }
+  ],
+  "status": "pending",
+  "tip": 500,
+  "tracking_url": "https://delivery.uber.com/orders/62105936-e413-40d5-aecd-4c335c3cd3c2",
+  "undeliverable_action": "",
+  "undeliverable_reason": "",
+  "updated": "2023-05-01T22:16:20.023Z",
+  "uuid": "62105936E41340D5AECD4C335C3CD3C2",
+  "return": {
+    "name": "Joan P.",
+    "phone_number": "+16283337630",
+    "address": "2200 Market St, San Francisco, CA 94114, US",
+    "detailed_address": {
+      "street_address_1": "2200 Market St",
+      "street_address_2": "",
+      "city": "San Francisco",
+      "state": "CA",
+      "zip_code": "94114",
+      "country": "US"
+    },
+    "notes": "",
+    "seller_notes": "",
+    "courier_notes": "",
+    "location": {
+      "lat": 37.765987,
+      "lng": -122.43153
+    },
+    "verification": {
+      "signature": {
+        "image_url": "https://tb-static.uber.com/prod/file-upload/uploads/courier-task-platform/82a0d88e-100d-40d6-a0d0-ea9c4a2e55bb",
+        "name": "Joan",
+        "signer_relationship": "SELF"
+      },
+      "barcodes": [
+        {
+          "type": "CODE128",
+          "value": "1234567890",
+          "scan_result": {
+            "outcome": "SUCCESS",
+            "timestamp": "2023-05-02T04:34:04.957Z"
+          }
+        }
+      ],
+      "picture": {
+        "image_url": "https://tb-static.uber.com/prod/file-upload/uploads/courier-task-platform/82a0d88e-100d-40d6-a0d0-ea9c4a2e55bb"
+      },
+      "identification": {
+        "min_age_verified": false
+      },
+      "pin_code": {
+        "entered": "3902"
+      },
+      "completion_location": {
+        "lat": 37.765987,
+        "lng": -122.43153
+      }
+    },
+    "verification_requirements": {
+      "signature": true,
+      "signature_requirement": {
+        "enabled": true,
+        "collect_signer_name": true,
+        "collect_signer_relationship": true
+      },
+      "barcodes": [
+        {
+          "value": "string",
+          "type": "CODE39"
+        }
+      ],
+      "pincode": {
+        "enabled": true,
+        "value": "1234"
+      },
+      "identification": {
+        "min_age": 21,
+        "no_sobriety_check": true
+      },
+      "picture": true
+    },
+    "status": "completed",
+    "status_timestamp": "2023-05-02T02:30:07.560Z",
+    "external_store_id": "my_store_123"
+  }
+}

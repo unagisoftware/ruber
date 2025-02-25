@@ -20,3 +20,6 @@ Metrics/CyclomaticComplexity:
 
 Metrics/MethodLength:
   Enabled: false
+
+Metrics/ClassLength:
+  Max: 200
