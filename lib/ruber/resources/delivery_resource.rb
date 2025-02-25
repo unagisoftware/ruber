@@ -26,6 +26,12 @@ module Ruber
 
         Delivery.new response.body
       end
+
+      def proof_of_delivery(id, params)
+        response = Request.new("customers/#{Ruber.customer_id}/deliveries/#{id}/proof_of_delivery").post(body: params)
+
+        Delivery::ProofOfDelivery.new response.body
+      end
     end
   end
 end

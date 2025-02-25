@@ -36,6 +36,14 @@ class DelvieryResourceTest < Minitest::Test
     assert_equal "quote_id", delivery.quote_id
   end
 
+  def test_proof_of_delivery
+    stub_delivery_proof_of_delivery_request
+    proof_of_delivery = Ruber::DeliveryResource.proof_of_delivery("del_some_id", proof_of_delivery_params)
+
+    assert_instance_of Ruber::Delivery::ProofOfDelivery, proof_of_delivery
+    assert_equal "document", proof_of_delivery.document
+  end
+
   private
 
   def stub_delivery_request
@@ -71,6 +79,17 @@ class DelvieryResourceTest < Minitest::Test
       )
   end
 
+  def stub_delivery_proof_of_delivery_request
+    stub_token_request
+    stub_request(:post, %r{.*customers/#{Ruber.customer_id}/deliveries/.*})
+      .with(headers: { "Authorization" => "Bearer #{Ruber::Authenticator.access_token}" })
+      .to_return(
+        headers: { "Content-Type" => "application/json" },
+        status: 200,
+        body: File.new("test/fixtures/delivery_proof_of_delivery.json").read
+      )
+  end
+
   def stub_deliveries_request
     stub_token_request
     stub_request(:get, %r{.*customers/#{Ruber.customer_id}/deliveries})
@@ -80,6 +99,13 @@ class DelvieryResourceTest < Minitest::Test
         status: 200,
         body: File.new("test/fixtures/deliveries.json").read
       )
+  end
+
+  def proof_of_delivery_params
+    {
+      "waypoint": "dropoff",
+      "type": "picture"
+    }
   end
 
   def delivery_params
