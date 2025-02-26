@@ -1,27 +1,45 @@
 # Ruber
 
-TODO: Delete this and the text below, and describe your gem
+The easiest way to integrate to Uber API.
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/ruber`. To experiment with that code, run `bin/console` for an interactive prompt.
+> The current version includes the integration with the Uber Direct API.
 
 ## Installation
 
-TODO: Replace `UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG` with your gem name right after releasing it to RubyGems.org. Please do not do it earlier due to security reasons. Alternatively, replace this section with instructions to install your gem from git if you don't plan to release to RubyGems.org.
+Add this line to your application's Gemfile:
 
-Install the gem and add to the application's Gemfile by executing:
-
-```bash
-bundle add UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG
+```
+gem 'ruber', github: "unagisoftware/ruber.rb"
 ```
 
-If bundler is not being used to manage dependencies, install the gem by executing:
+And then execute:
+
+```
+$ bundle
+```
+
+## Usage
+
+To access the API, you'll need to create an account on Uber (see the [Uber developers website](https://developer.uber.com) for more information). Once you have your account, go to the developer options to find your `customer_id`, `client_id`, and `client_secret`.
+
+You need to pass those values to the gem. We recommend doing this using an initializer. Run the following command to create a sample initializer:
 
 ```bash
-gem install UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG
+rails generate ruber:init
 ```
+
+This will create an initializer where you can set the variables:
+
+```ruby
+Ruber.configure do |config|
+  config.customer_id = 'uber-customer-id'
+  config.client_id = 'uber-client-id'
+  config.client_secret = 'uber-client-secret'
+end
+```
+
 ## Cache
-Ruber uses a caching solution to improve efficiency (e.g., for caching tokens). By default, it uses a simple in-memory cache, but you can change the cache method by setting the `Ruber.cache` attribute
-
+Ruber uses a caching solution to improve efficiency (e.g., for caching tokens). By default, it uses a simple file cache, but you can change the cache method by setting the `Ruber.cache` attribute:
 
 ```ruby
 Ruber.cache = Redis.new
@@ -31,9 +49,47 @@ Ruber.cache = Rails.cache
 Ruber.cache = YourCustomCache.new
 ```
 
-## Usage
+### File cache
 
-TODO: Write usage instructions here
+File cache is the default cache option. In case you want to go for this option, you'll need to set the `file_cache_path` attribute to determine where to save the file. Make sure that this path is in your `.gitignore` to avoid pushing your token to the repo.
+
+## Resources
+
+Responses are created as objects (e.g. Ruber::Delivery) using [Data Define](https://docs.ruby-lang.org/en/3.2/Data.html), allowing you to access data in a Ruby-ish way.
+
+### DeliveryResource
+
+```ruby
+Ruber::DeliveryResource.all
+#=> Ruber::Collection of Ruber::Delivery
+
+Ruber::DeliveryResource.find("del_id")
+#=> Ruber::Delivery
+
+Ruber::DeliveryResource.create({...}}
+#=> Ruber::Delivery
+
+Ruber::DeliveryResource.cancel("del_id")
+#=> Ruber::Delivery
+
+Ruber::DeliveryResource.update("del_id", {...})
+#=> Ruber::Delivery
+
+Ruber::DeliveryResource.update("del_id", {...})
+#=> Ruber::Delivery::ProofOfDelivery
+```
+
+## Errors
+If the Uber API returns an error, a `Ruber::Error` exception is raised. Ruber::Error provides the following accessors: `message`, `metadata`, `status`:
+
+```ruby
+error.message
+# => "An active delivery like this already exists."
+error.metadata
+# => .{ "delivery_id": "del_4y-aAymET6KH9TGTJ-ydxx" }
+error.status
+# => 409
+```
 
 ## Development
 
@@ -43,12 +99,8 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/ruber. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/[USERNAME]/ruber/blob/master/CODE_OF_CONDUCT.md).
+Bug reports and pull requests are welcome on GitHub at https://github.com/unagisoftware/ruber. This project is intended to be a safe, welcoming space for collaboration.
 
 ## License
 
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
-
-## Code of Conduct
-
-Everyone interacting in the Ruber project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/ruber/blob/master/CODE_OF_CONDUCT.md).
