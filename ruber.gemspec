@@ -5,8 +5,8 @@ require_relative "lib/ruber/version"
 Gem::Specification.new do |spec|
   spec.name = "ruber"
   spec.version = Ruber::VERSION
-  spec.authors = ["Bruno Costanzo"]
-  spec.email = ["dev.bcostanzo@gmail.com"]
+  spec.authors = ["Bruno Costanzo", "Nicolás Galdámez"]
+  spec.email = ["bruno.costanzo@unagisoftware.com", "nicolas.galdamez@unagisoftware.com"]
 
   spec.summary = "Ruby bindings for Uber's API"
   spec.description = "Ruby bindings for Uber's API"
@@ -16,7 +16,7 @@ Gem::Specification.new do |spec|
 
   spec.metadata["homepage_uri"] = spec.homepage
   spec.metadata["source_code_uri"] = "https://github.com/unagisoftware/ruber"
-  # spec.metadata["changelog_uri"] = "Put your gem's CHANGELOG.md URL here."
+  spec.metadata["changelog_uri"] = "https://github.com/unagisoftware/ruber/blob/main/CHANGELOG.md"
 
   # Specify which files should be added to the gem when it is released.
   # The `git ls-files -z` loads the files in the RubyGem that have been added into git.
