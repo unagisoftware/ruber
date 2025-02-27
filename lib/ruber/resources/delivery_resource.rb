@@ -3,8 +3,8 @@
 module Ruber
   class DeliveryResource
     class << self
-      def all
-        response = Request.new("customers/#{Ruber.customer_id}/deliveries").get
+      def all(**params)
+        response = Request.new("customers/#{Ruber.customer_id}/deliveries").get(params: params)
 
         Collection.from_response(response.body, type: Delivery)
       end

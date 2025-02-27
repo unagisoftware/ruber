@@ -6,7 +6,7 @@ module Ruber
 
     def self.from_response(response_body, type:)
       new(
-        data: response_body[:data].map { |attrs| type.new(attrs) },
+        data: response_body[:data]&.map { |attrs| type.new(attrs) },
         next_href: response_body[:next_href]
       )
     end

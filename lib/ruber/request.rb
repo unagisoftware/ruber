@@ -11,8 +11,8 @@ module Ruber
       @url = url
     end
 
-    def get
-      handle_response connection.get(@url)
+    def get(params: {})
+      handle_response connection.get(@url, params)
     end
 
     def post(body: {}, headers: {})

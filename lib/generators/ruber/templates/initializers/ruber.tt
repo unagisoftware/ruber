@@ -2,4 +2,7 @@ Ruber.configure do |config|
   config.customer_id = 'uber-customer-id'
   config.client_id = 'uber-client-id'
   config.client_secret = 'uber-client-secret'
+
+  # If you want to use a file cache, you can set the path here
+  # config.file_cache_path = 'tmp/uber_cache.yaml'
 end
