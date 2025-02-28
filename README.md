@@ -17,18 +17,19 @@ And then execute:
 ```
 $ bundle
 ```
+## Configuration
+Ruber can be customized using various configuration options. To see the full list, run the `init` generator to create an initializer with all the options. Then, uncomment the variables you want to customize.
+
+```bash
+rails generate ruber:init
+# This will create a files ruber.rb under config/initializers 
+```
 
 ## Usage
 
 To access the API, you'll need to create an account on Uber (see the [Uber developers website](https://developer.uber.com) for more information). Once you have your account, go to the developer options to find your `customer_id`, `client_id`, and `client_secret`.
 
-You need to pass those values to the gem. We recommend doing this using an initializer. Run the following command to create a sample initializer:
-
-```bash
-rails generate ruber:init
-```
-
-This will create an initializer where you can set the variables:
+You need to pass those values to the gem. You can do this from anywhere, but we recommend using an initializer like this:
 
 ```ruby
 Ruber.configure do |config|
@@ -38,8 +39,10 @@ Ruber.configure do |config|
 end
 ```
 
+_ℹ️ If you run the `init` generator you should set the attributes in the generated initializer (`config/initializers/ruber`)_
+
 ## Cache
-Ruber uses a caching solution to improve efficiency (e.g., for caching tokens). By default, it uses a simple file cache, but you can change the cache method by setting the `Ruber.cache` attribute:
+Ruber uses a caching solution to improve efficiency (e.g., for caching tokens). By default, it uses a simple file cache (see below), but you can change the cache method by setting the `Ruber.cache` attribute:
 
 ```ruby
 Ruber.cache = Redis.new
@@ -51,11 +54,31 @@ Ruber.cache = YourCustomCache.new
 
 ### File cache
 
-File cache is the default cache option. In case you want to go for this option, you'll need to set the `file_cache_path` attribute to determine where to save the file. Make sure that this path is in your `.gitignore` to avoid pushing your token to the repo.
+File cache is the default cache option. It uses a yaml file to store the cached data.
+
+```yml
+---
+# Example of file automatically generated
+:access_token:
+  :token: IA.VUNmGAAAAAAAEgASAAAABwAIAAwAAAAAAAAAEgAAAAAAAAGwAAAAFAAAAAAADgAQAAQAAAAIAAwAAAAOAAAAhAAAABwAAAAEAAAAEAAAAKbivxMQNu9xZfQn_LJeh75fAAAAcqjQlrRGJjknFRPDLARG0Uj0kIvmkIh7cy_HI8cPjKMP4ja0xAvKLSJ1H9eU1ALQJkExzcMwvMkPyVjpSm-c4Wk1S__oSOK_pkAX1kywZr8sBpP_gtPwBhrz3SF8L6YADAAAALkCO6lUHox2Dp907iQAAABiMGQ4NTgwMy0zOGEwLTQyYjMtODA2ZS03YTRjZjhlMTk2ZWU
+  :expires_at: 2025-03-27 16:46:12.256308000 -03:00
+```
+
+In case you want to go for this option, you'll need to set the `file_cache_path` attribute to determine where to save the file. 
+
+‼️ **Make sure that this path is in your `.gitignore` to avoid pushing your token to the repo.**
 
 ## Resources
 
-Responses are created as objects (e.g. Ruber::Delivery) using [Data Define](https://docs.ruby-lang.org/en/3.2/Data.html), allowing you to access data in a Ruby-ish way.
+Ruber maps the resources from Uber API to internal resources. For example there is a `Ruber::DeliveryResource` that lets you create, find, list, cancel, etc, deliveries in Uber. When you call this methods on these resources, it'll return objects that are created using [Data Define](https://docs.ruby-lang.org/en/3.2/Data.html), allowing you to access data in a Ruby-ish way.
+Ruber maps resources from the Uber API to internal resources. For example, `Ruber::DeliveryResource` lets you create, find, list, cancel, and manage deliveries in Uber. When you call these methods on a resource, it returns objects created using [Data Define](https://docs.ruby-lang.org/en/3.2/Data.html), allowing you to access data in a Ruby-like way.
+
+```ruby
+delivery = Ruber::DeliveryResource.find("del_id1231asdfas")
+#=> Ruber::Delivery
+delivery.id
+#=> del_id1231asdfas
+```
 
 ### DeliveryResource
 
@@ -79,16 +102,22 @@ Ruber::DeliveryResource.update("del_id", {...})
 #=> Ruber::Delivery::ProofOfDelivery
 ```
 
+## Authentication
+To access the Uber API, you need a valid access token from Uber's OAuth service. All requests to https://api.uber.com/ use OAuth 2.0 with the client_credentials grant type.
+
+Authentication and caching are handled automatically by the gem. The only thing you need to do is provide the required credentials (`customer_id`, `client_id`, and `client_secret`).
+
 ## Errors
 If the Uber API returns an error, a `Ruber::Error` exception is raised. Ruber::Error provides the following accessors: `message`, `metadata`, `status`:
 
 ```ruby
-error.message
-# => "An active delivery like this already exists."
-error.metadata
-# => .{ "delivery_id": "del_4y-aAymET6KH9TGTJ-ydxx" }
-error.status
-# => 409
+begin
+  Ruber::DeliveryResource.create(...)
+rescue Ruber::Error => error
+  puts error.message # "The pickup address is invalid"
+  puts error.metadata # { "pickup_address": "123 Fake Street, Nowhere" }
+  puts error.status # 400
+end
 ```
 
 ## Development
