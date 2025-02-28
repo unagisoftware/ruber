@@ -116,7 +116,7 @@ begin
 rescue Ruber::Error => error
   puts error.message # "The pickup address is invalid"
   puts error.metadata # { "pickup_address": "123 Fake Street, Nowhere" }
-  puts error.status # 409
+  puts error.status # 400
 end
 ```
 
