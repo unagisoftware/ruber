@@ -22,7 +22,7 @@ Ruber can be customized using various configuration options. To see the full lis
 
 ```bash
 rails generate ruber:init
-# This will create a files ruber.rb under config/initializers 
+# This will create a file ruber.rb under config/initializers
 ```
 
 ## Usage
@@ -64,13 +64,12 @@ File cache is the default cache option. It uses a yaml file to store the cached 
   :expires_at: 2025-03-27 16:46:12.256308000 -03:00
 ```
 
-In case you want to go for this option, you'll need to set the `file_cache_path` attribute to determine where to save the file. 
+In case you want to go for this option, you'll need to set the `file_cache_path` attribute to determine where to save the file.
 
 ‼️ **Make sure that this path is in your `.gitignore` to avoid pushing your token to the repo.**
 
 ## Resources
 
-Ruber maps the resources from Uber API to internal resources. For example there is a `Ruber::DeliveryResource` that lets you create, find, list, cancel, etc, deliveries in Uber. When you call this methods on these resources, it'll return objects that are created using [Data Define](https://docs.ruby-lang.org/en/3.2/Data.html), allowing you to access data in a Ruby-ish way.
 Ruber maps resources from the Uber API to internal resources. For example, `Ruber::DeliveryResource` lets you create, find, list, cancel, and manage deliveries in Uber. When you call these methods on a resource, it returns objects created using [Data Define](https://docs.ruby-lang.org/en/3.2/Data.html), allowing you to access data in a Ruby-like way.
 
 ```ruby
