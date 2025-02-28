@@ -98,7 +98,7 @@ Ruber::DeliveryResource.cancel("del_id")
 Ruber::DeliveryResource.update("del_id", {...})
 #=> Ruber::Delivery
 
-Ruber::DeliveryResource.update("del_id", {...})
+Ruber::DeliveryResource.proof_of_delivery("del_id", {...})
 #=> Ruber::Delivery::ProofOfDelivery
 ```
 
