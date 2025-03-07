@@ -9,7 +9,7 @@ The easiest way to integrate to Uber API.
 Add this line to your application's Gemfile:
 
 ```
-gem 'ruber', github: "unagisoftware/ruber.rb"
+gem 'ruber', github: "unagisoftware/ruber"
 ```
 
 And then execute:
