@@ -1,35 +1,21 @@
 # frozen_string_literal: true
 
+require "ostruct"
+
 module Ruber
-  class Object
+  class Object < OpenStruct
     def initialize(attributes)
-      @data = to_data_object(attributes)
+      super(to_ostruct(attributes))
     end
 
-    def to_data_object(obj)
+    def to_ostruct(obj)
       if obj.is_a?(Hash)
-        wrapped = obj.transform_values do |val|
-          result = to_data_object(val)
-
-          result.is_a?(Data) ? self.class.new(result.to_h) : result
-        end
-
-        Data.define(*wrapped.keys).new(**wrapped)
+        OpenStruct.new(obj.transform_values { |val| to_ostruct(val) })
       elsif obj.is_a?(Array)
-        obj.map { |o| to_data_object(o) }
+        obj.map { |o| to_ostruct(o) }
       else
         obj
       end
     end
-
-    private
-
-    def method_missing(name, *args)
-      super unless @data.respond_to?(name)
-
-      @data.public_send(name, *args)
-    end
-
-    def respond_to_missing?(name, *args) = @data.respond_to?(name) || super
   end
 end

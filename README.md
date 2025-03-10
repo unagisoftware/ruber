@@ -70,7 +70,7 @@ In case you want to go for this option, you'll need to set the `file_cache_path`
 
 ## Resources
 
-Ruber maps resources from the Uber API to internal resources. For example, `Ruber::DeliveryResource` lets you create, find, list, cancel, and manage deliveries in Uber. When you call these methods on a resource, it returns objects created using [Data Define](https://docs.ruby-lang.org/en/3.2/Data.html), allowing you to access data in a Ruby-like way.
+Ruber maps resources from the Uber API to internal resources. For example, `Ruber::DeliveryResource` lets you create, find, list, cancel, and manage deliveries in Uber. When you call these methods on a resource, it returns objects created using OpenStruct, allowing you to access data in a Ruby-like way.
 
 ```ruby
 delivery = Ruber::DeliveryResource.find("del_id1231asdfas")

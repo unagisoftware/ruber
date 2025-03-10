@@ -21,16 +21,8 @@ module Ruber
       assert_equal :baz, object.foo.first.bar
     end
 
-    def test_respond_to_missing
-      assert_respond_to Ruber::Object.new(foo: "bar"), :foo
-    end
-
-    def test_invalid_method
-      assert_raises(NoMethodError) { Ruber::Object.new(foo: "bar").invalid }
-    end
-
     def test_respond_with_ruber_object
-      assert_instance_of Ruber::Object, Ruber::Object.new(foo: { bar: "baz" }).foo
+      assert_instance_of OpenStruct, Ruber::Object.new(foo: { bar: "baz" }).foo
     end
   end
 end
