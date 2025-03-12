@@ -8,6 +8,7 @@ module Ruber
     include WebMock::API
 
     def setup
+      Ruber.cache = Ruber::FileCache.new("test/tmp/ruber_cache.yaml")
       Ruber.cache.clear
     end
 

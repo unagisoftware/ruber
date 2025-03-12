@@ -4,10 +4,15 @@ Ruber.configure do |config|
   config.client_id = 'uber-client-id'
   config.client_secret = 'uber-client-secret'
 
+  # --------------------------------------------------------------------------
+  # Cache
+  # --------------------------------------------------------------------------
+  # Ruber comes with a File cache option. It uses a yaml file to store the cached data.
+  # Uncomment the following line to use the file cache. Make sure the path is in your
+  # .gitignore to avoid pushing your token to the repo.
+  # config.cache = Ruber::FileCache.new('tmp/ruber_cache.yaml')
+
   # If you want to use a different cache option (like redis, memcache, etc).
   # It might be any object that responds to read/write/delete/clear
   # config.cache = Rails.cache
-
-  # If you want to use a file cache, you can set the path here
-  # config.file_cache_path = 'tmp/uber_cache.yaml'
 end
