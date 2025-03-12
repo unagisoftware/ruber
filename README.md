@@ -2,7 +2,16 @@
 
 The easiest way to integrate to Uber API.
 
+### Why Ruber?
+
+Because Ruby + Uber just makes sense 🚗💎
+
+We named this gem Ruber because, well... it’s built in Ruby and integrates with Uber. See what we did there? 😏
+
+This gem helps you seamlessly connect your Ruby app with Uber’s services. Hop in, let’s ride!
+
 > The current version includes the integration with the Uber Direct API.
+
 
 ## Installation
 
@@ -140,3 +149,11 @@ The gem is available as open source under the terms of the [MIT License](https:/
 ## Code of Conduct
 
 Everyone interacting in the Ruber project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/unagisoftware/ruber/blob/master/CODE_OF_CONDUCT.md).
+
+## About Unagi
+
+<img width="208" alt="isologotipo naranja cuadrado" style="margin:auto" src="https://github.com/user-attachments/assets/05750673-b2ba-473a-b8c6-c400a4403a4a" />
+
+This repo is maintained and funded by [Unagi](https://unagisoftware.com).
+
+Do you want to hire us? [Let's get in touch!](https://unagisoftware.com/#contact)
