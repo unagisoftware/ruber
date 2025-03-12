@@ -1,14 +1,14 @@
 # frozen_string_literal: true
 
-require_relative "configuration/null_cache"
+require_relative "configuration/memory_cache"
 require_relative "configuration/file_cache"
 
 module Ruber
   class Configuration
-    attr_accessor :customer_id, :client_id, :client_secret, :file_cache_path
+    attr_accessor :customer_id, :client_id, :client_secret
 
     def cache
-      @cache ||= FileCache.new
+      @cache ||= MemoryCache.new
     end
 
     def cache=(store)

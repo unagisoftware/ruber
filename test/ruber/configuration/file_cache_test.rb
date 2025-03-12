@@ -7,21 +7,14 @@ require "fileutils"
 module Ruber
   class FileCacheTest < Minitest::Test
     def setup
-      File.delete(Ruber.configuration.file_cache_path) if File.exist?(Ruber.configuration.file_cache_path)
+      file_cache_path = "ruber_cache.yaml"
+      File.delete(file_cache_path) if File.exist?(file_cache_path)
 
-      @cache = FileCache.new
+      @cache = FileCache.new(file_cache_path)
     end
 
     def teardown
       @cache.clear
-    end
-
-    def test_initialize_raises_error_if_no_file_path
-      Ruber.configuration.stub :file_cache_path, nil do
-        assert_raises(RuntimeError, "FileCache requires a file path") do
-          FileCache.new
-        end
-      end
     end
 
     def test_write_and_read

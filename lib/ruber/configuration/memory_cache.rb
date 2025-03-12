@@ -2,7 +2,7 @@
 
 module Ruber
   class Configuration
-    class NullCache
+    class MemoryCache
       def read(key) = memory_store[key]
       def write(key, value, _options = {}) = memory_store[key] = value
       def clear = memory_store.clear

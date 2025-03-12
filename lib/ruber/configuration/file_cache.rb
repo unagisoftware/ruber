@@ -4,17 +4,16 @@ require "yaml/store"
 
 module Ruber
   class FileCache
-    def initialize
-      raise "FileCache requires a file path" unless Ruber.configuration.file_cache_path
-
-      @store = YAML::Store.new(Ruber.configuration.file_cache_path)
+    def initialize(file_cache_path)
+      @file_cache_path = file_cache_path
+      @store = YAML::Store.new(file_cache_path)
     end
 
     def read(key) = @store.transaction { @store[key] }
     def write(key, value) = @store.transaction { @store[key] = value }
 
     def clear
-      File.delete(Ruber.configuration.file_cache_path) if File.exist?(Ruber.configuration.file_cache_path)
+      File.delete(@file_cache_path) if File.exist?(@file_cache_path)
     end
 
     def delete(key) = @store.transaction { @store.delete(key) }

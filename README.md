@@ -42,7 +42,8 @@ end
 _ℹ️ If you run the `init` generator you should set the attributes in the generated initializer (`config/initializers/ruber`)_
 
 ## Cache
-Ruber uses a caching solution to improve efficiency (e.g., for caching tokens). By default, it uses a simple file cache (see below), but you can change the cache method by setting the `Ruber.cache` attribute:
+Ruber uses a caching solution to improve efficiency (e.g., for caching tokens). By default, it uses a simple memory cache,
+but you can change the cache method by setting the `Ruber.cache` attribute.
 
 ```ruby
 Ruber.cache = Redis.new
@@ -52,9 +53,12 @@ Ruber.cache = Rails.cache
 Ruber.cache = YourCustomCache.new
 ```
 
+> Try not to use the memory cache in production, as it will be cleared on every request.
+
+
 ### File cache
 
-File cache is the default cache option. It uses a yaml file to store the cached data.
+Ruber comes with a simple File cache option. It uses a yaml file to store the cached data.
 
 ```yml
 ---
