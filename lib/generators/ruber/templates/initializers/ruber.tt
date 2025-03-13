@@ -14,5 +14,5 @@ Ruber.configure do |config|
 
   # If you want to use a different cache option (like redis, memcache, etc).
   # It might be any object that responds to read/write/delete/clear
-  # config.cache = Rails.cache
+  # config.cache = Rails.cache unless Rails.env.test?
 end
