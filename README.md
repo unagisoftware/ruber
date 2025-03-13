@@ -16,7 +16,7 @@ Then we sadly realized that the name was already taken, so we renamed it to `Rub
 Add this line to your application's Gemfile:
 
 ```
-gem 'ruberto', github: "unagisoftware/ruberto"
+gem 'ruberto'
 ```
 
 And then execute:
