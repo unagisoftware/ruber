@@ -8,7 +8,7 @@ require "support/helpers"
 require "minitest/reporters"
 Minitest::Reporters.use!
 
-require "r_uber"
+require "ruberto"
 
 class Minitest::Test # rubocop:disable Style/ClassAndModuleChildren
   include TestHelpers
@@ -16,7 +16,7 @@ class Minitest::Test # rubocop:disable Style/ClassAndModuleChildren
   def before_setup
     super
 
-    Ruber.configuration.customer_id = "a_customer_id"
-    Ruber.configuration.client_secret = "a_client_secret"
+    Ruberto.configuration.customer_id = "a_customer_id"
+    Ruberto.configuration.client_secret = "a_client_secret"
   end
 end

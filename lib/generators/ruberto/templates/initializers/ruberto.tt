@@ -1,0 +1,18 @@
+Ruberto.configure do |config|
+  # Required attributes
+  config.customer_id = 'uber-customer-id'
+  config.client_id = 'uber-client-id'
+  config.client_secret = 'uber-client-secret'
+
+  # --------------------------------------------------------------------------
+  # Cache
+  # --------------------------------------------------------------------------
+  # Ruberto comes with a File cache option. It uses a yaml file to store the cached data.
+  # Uncomment the following line to use the file cache. Make sure the path is in your
+  # .gitignore to avoid pushing your token to the repo.
+  # config.cache = Ruberto::FileCache.new('tmp/ruberto_cache.yaml')
+
+  # If you want to use a different cache option (like redis, memcache, etc).
+  # It might be any object that responds to read/write/delete/clear
+  # config.cache = Rails.cache unless Rails.env.test?
+end

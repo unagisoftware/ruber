@@ -1,14 +1,12 @@
-# Ruber
-
-The easiest way to integrate to Uber API.
-
-### Why Ruber?
-
-Because Ruby + Uber just makes sense 🚗💎
-
-We named this gem Ruber because, well... it’s built in Ruby and integrates with Uber. See what we did there? 😏
+# Ruberto
 
 This gem helps you seamlessly connect your Ruby app with Uber’s services. Hop in, let’s ride!
+
+### Why Ruberto?
+
+It was originally named `Ruber`, because, well... it’s built in Ruby and integrates with Uber. See what we did there? 😏
+
+Then we sadly realized that the name was already taken, so we renamed it to `Ruberto`. Hope you like it!
 
 > The current version includes the integration with the Uber Direct API.
 
@@ -18,7 +16,7 @@ This gem helps you seamlessly connect your Ruby app with Uber’s services. Hop 
 Add this line to your application's Gemfile:
 
 ```
-gem 'ruber', github: "unagisoftware/ruber"
+gem 'ruberto', github: "unagisoftware/ruberto"
 ```
 
 And then execute:
@@ -27,11 +25,11 @@ And then execute:
 $ bundle
 ```
 ## Configuration
-Ruber can be customized using various configuration options. To see the full list, run the `init` generator to create an initializer with all the options. Then, uncomment the variables you want to customize.
+Ruberto can be customized using various configuration options. To see the full list, run the `init` generator to create an initializer with all the options. Then, uncomment the variables you want to customize.
 
 ```bash
-rails generate ruber:init
-# This will create a file ruber.rb under config/initializers
+rails generate ruberto:init
+# This will create a file ruberto.rb under config/initializers
 ```
 
 ## Usage
@@ -41,25 +39,25 @@ To access the API, you'll need to create an account on Uber (see the [Uber devel
 You need to pass those values to the gem. You can do this from anywhere, but we recommend using an initializer like this:
 
 ```ruby
-Ruber.configure do |config|
+Ruberto.configure do |config|
   config.customer_id = 'uber-customer-id'
   config.client_id = 'uber-client-id'
   config.client_secret = 'uber-client-secret'
 end
 ```
 
-_ℹ️ If you run the `init` generator you should set the attributes in the generated initializer (`config/initializers/ruber`)_
+_ℹ️ If you run the `init` generator you should set the attributes in the generated initializer (`config/initializers/ruberto`)_
 
 ## Cache
-Ruber uses a caching solution to improve efficiency (e.g., for caching tokens). By default, it uses a simple memory cache,
-but you can change the cache method by setting the `Ruber.cache` attribute.
+Ruberto uses a caching solution to improve efficiency (e.g., for caching tokens). By default, it uses a simple memory cache,
+but you can change the cache method by setting the `Ruberto.cache` attribute.
 
 ```ruby
-Ruber.cache = Redis.new
+Ruberto.cache = Redis.new
 # or
-Ruber.cache = Rails.cache
+Ruberto.cache = Rails.cache
 # or any object that responds to read/write/delete/clear
-Ruber.cache = YourCustomCache.new
+Ruberto.cache = YourCustomCache.new
 ```
 
 > Try not to use the memory cache in production, as it will be cleared on every request.
@@ -67,7 +65,7 @@ Ruber.cache = YourCustomCache.new
 
 ### File cache
 
-Ruber comes with a simple File cache option. It uses a yaml file to store the cached data.
+Ruberto comes with a simple File cache option. It uses a yaml file to store the cached data.
 
 ```yml
 ---
@@ -83,11 +81,11 @@ In case you want to go for this option, you'll need to set the `file_cache_path`
 
 ## Resources
 
-Ruber maps resources from the Uber API to internal resources. For example, `Ruber::DeliveryResource` lets you create, find, list, cancel, and manage deliveries in Uber. When you call these methods on a resource, it returns objects created using OpenStruct, allowing you to access data in a Ruby-like way.
+Ruberto maps resources from the Uber API to internal resources. For example, `Ruberto::DeliveryResource` lets you create, find, list, cancel, and manage deliveries in Uber. When you call these methods on a resource, it returns objects created using OpenStruct, allowing you to access data in a Ruby-like way.
 
 ```ruby
-delivery = Ruber::DeliveryResource.find("del_id1231asdfas")
-#=> Ruber::Delivery
+delivery = Ruberto::DeliveryResource.find("del_id1231asdfas")
+#=> Ruberto::Delivery
 delivery.id
 #=> del_id1231asdfas
 ```
@@ -95,23 +93,23 @@ delivery.id
 ### DeliveryResource
 
 ```ruby
-Ruber::DeliveryResource.all
-#=> Ruber::Collection of Ruber::Delivery
+Ruberto::DeliveryResource.all
+#=> Ruberto::Collection of Ruberto::Delivery
 
-Ruber::DeliveryResource.find("del_id")
-#=> Ruber::Delivery
+Ruberto::DeliveryResource.find("del_id")
+#=> Ruberto::Delivery
 
-Ruber::DeliveryResource.create({...}}
-#=> Ruber::Delivery
+Ruberto::DeliveryResource.create({...}}
+#=> Ruberto::Delivery
 
-Ruber::DeliveryResource.cancel("del_id")
-#=> Ruber::Delivery
+Ruberto::DeliveryResource.cancel("del_id")
+#=> Ruberto::Delivery
 
-Ruber::DeliveryResource.update("del_id", {...})
-#=> Ruber::Delivery
+Ruberto::DeliveryResource.update("del_id", {...})
+#=> Ruberto::Delivery
 
-Ruber::DeliveryResource.proof_of_delivery("del_id", {...})
-#=> Ruber::Delivery::ProofOfDelivery
+Ruberto::DeliveryResource.proof_of_delivery("del_id", {...})
+#=> Ruberto::Delivery::ProofOfDelivery
 ```
 
 ## Authentication
@@ -120,12 +118,12 @@ To access the Uber API, you need a valid access token from Uber's OAuth service.
 Authentication and caching are handled automatically by the gem. The only thing you need to do is provide the required credentials (`customer_id`, `client_id`, and `client_secret`).
 
 ## Errors
-If the Uber API returns an error, a `Ruber::Error` exception is raised. Ruber::Error provides the following accessors: `message`, `metadata`, `status`:
+If the Uber API returns an error, a `Ruberto::Error` exception is raised. Ruberto::Error provides the following accessors: `message`, `metadata`, `status`:
 
 ```ruby
 begin
-  Ruber::DeliveryResource.create(...)
-rescue Ruber::Error => error
+  Ruberto::DeliveryResource.create(...)
+rescue Ruberto::Error => error
   puts error.message # "The pickup address is invalid"
   puts error.metadata # { "pickup_address": "123 Fake Street, Nowhere" }
   puts error.status # 400
@@ -140,7 +138,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/unagisoftware/ruber. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/unagisoftware/ruber/blob/master/CODE_OF_CONDUCT.md).
+Bug reports and pull requests are welcome on GitHub at https://github.com/unagisoftware/ruberto. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/unagisoftware/ruberto/blob/master/CODE_OF_CONDUCT.md).
 
 ## License
 
@@ -148,7 +146,7 @@ The gem is available as open source under the terms of the [MIT License](https:/
 
 ## Code of Conduct
 
-Everyone interacting in the Ruber project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/unagisoftware/ruber/blob/master/CODE_OF_CONDUCT.md).
+Everyone interacting in the Ruberto project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/unagisoftware/ruberto/blob/master/CODE_OF_CONDUCT.md).
 
 ## About Unagi
 

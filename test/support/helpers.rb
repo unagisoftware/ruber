@@ -2,7 +2,7 @@
 
 module TestHelpers
   def stub_token_request(access_token: "foo", expires_in: 3600)
-    stub_request(:post, Ruber::Authenticator::OAUTH_URL)
+    stub_request(:post, Ruberto::Authenticator::OAUTH_URL)
       .to_return(
         status: 200,
         headers: { "Content-Type" => "application/json" },

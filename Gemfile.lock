@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    r-uber (0.1.1)
+    ruberto (0.1.1)
       faraday (~> 2.0)
       faraday-net_http_persistent
 
@@ -89,8 +89,8 @@ DEPENDENCIES
   minitest (~> 5.16)
   minitest-reporters (~> 1.7)
   pry-byebug (~> 3.9)
-  r-uber!
   rake (~> 13.0)
+  ruberto!
   rubocop (~> 1.21)
   webmock
 
