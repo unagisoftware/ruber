@@ -8,7 +8,7 @@ require "support/helpers"
 require "minitest/reporters"
 Minitest::Reporters.use!
 
-require "ruber"
+require "r_uber"
 
 class Minitest::Test # rubocop:disable Style/ClassAndModuleChildren
   include TestHelpers

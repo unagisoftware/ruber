@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    ruber (0.1.1)
+    r-uber (0.1.1)
       faraday (~> 2.0)
       faraday-net_http_persistent
 
@@ -12,6 +12,7 @@ GEM
       public_suffix (>= 2.0.2, < 7.0)
     ansi (1.5.0)
     ast (2.4.2)
+    base64 (0.2.0)
     bigdecimal (3.1.9)
     builder (3.3.0)
     byebug (11.1.3)
@@ -21,7 +22,9 @@ GEM
       bigdecimal
       rexml
     dotenv (3.1.7)
-    faraday (2.0.0)
+    faraday (2.7.12)
+      base64
+      faraday-net_http (>= 2.0, < 3.1)
       ruby2_keywords (>= 0.0.4)
     faraday-net_http (2.1.0)
     faraday-net_http_persistent (2.0.2)
@@ -86,8 +89,8 @@ DEPENDENCIES
   minitest (~> 5.16)
   minitest-reporters (~> 1.7)
   pry-byebug (~> 3.9)
+  r-uber!
   rake (~> 13.0)
-  ruber!
   rubocop (~> 1.21)
   webmock
 

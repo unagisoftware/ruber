@@ -3,7 +3,7 @@
 require_relative "lib/ruber/version"
 
 Gem::Specification.new do |spec|
-  spec.name = "ruber"
+  spec.name = "r-uber"
   spec.version = Ruber::VERSION
   spec.authors = ["Bruno Costanzo", "Nicolás Galdámez"]
   spec.email = ["bruno.costanzo@unagisoftware.com", "nicolas.galdamez@unagisoftware.com"]
